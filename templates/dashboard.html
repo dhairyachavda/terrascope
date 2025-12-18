@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoMonitor - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <span class="logo-icon">🌍</span>
+            <h1>EcoMonitor</h1>
+        </div>
+        <div class="navbar-user">
+            <span id="user-name">User</span>
+            <button id="logout-btn" class="btn-logout">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>Analysis Indices</h3>
+            <ul class="indices-list">
+                <li class="index-btn active" data-index="ndvi">
+                    <span class="icon">🌱</span> NDVI (Vegetation)
+                </li>
+                <li class="index-btn" data-index="ndwi">
+                    <span class="icon">💧</span> NDWI (Water)
+                </li>
+                <li class="index-btn" data-index="lst">
+                    <span class="icon">🌡️</span> LST (Temperature)
+                </li>
+                <li class="index-btn" data-index="ndbi">
+                    <span class="icon">🏗️</span> NDBI (Built-up)
+                </li>
+                <li class="index-btn" data-index="gndvi">
+                    <span class="icon">🍃</span> GNDVI (Green)
+                </li>
+                <li class="index-btn" data-index="ndmi">
+                    <span class="icon">💦</span> NDMI (Moisture)
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <div class="dashboard-header">
+                <div class="header-info">
+                    <h2 id="index-title">NDVI - Vegetation Health Index</h2>
+                    <p id="index-desc">Normalized Difference Vegetation Index measures vegetation health</p>
+                </div>
+                <div class="header-controls">
+                    <select id="region-select" class="form-control">
+                        <option value="all">All Regions</option>
+                        <option value="north">North India</option>
+                        <option value="south">South India</option>
+                        <option value="east">East India</option>
+                        <option value="west">West India</option>
+                    </select>
+                    <input type="date" id="date-filter" class="form-control">
+                </div>
+            </div>
+
+            <!-- Visualization Container -->
+            <div class="viz-container">
+                <!-- Map -->
+                <div class="viz-section map-section">
+                    <h3>Satellite View</h3>
+                    <div id="map" class="map-placeholder">
+                        <div class="placeholder-content">
+                            <p>🛰️ Satellite Map Visualization</p>
+                            <small>Google Earth Engine Integration Coming Soon</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="viz-section stats-section">
+                    <h3>Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Mean Value</div>
+                            <div class="stat-value" id="stat-mean">0.45</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Std Dev</div>
+                            <div class="stat-value" id="stat-std">0.18</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Min Value</div>
+                            <div class="stat-value" id="stat-min">0.12</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Max Value</div>
+                            <div class="stat-value" id="stat-max">0.89</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="charts-container">
+                <!-- Temporal Trend -->
+                <div class="chart-section">
+                    <h3>Temporal Trend (Last 30 Days)</h3>
+                    <div id="trend-chart" class="chart-placeholder">
+                        <canvas id="trendCanvas"></canvas>
+                    </div>
+                </div>
+
+                <!-- Change Detection -->
+                <div class="chart-section">
+                    <h3>Change Detection Analysis</h3>
+                    <div id="change-chart" class="chart-placeholder">
+                        <canvas id="changeCanvas"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Legend -->
+            <div class="legend-section">
+                <h3>Value Legend</h3>
+                <div class="legend-gradient" id="legend">
+                    <div class="legend-item">
+                        <div class="color-box" style="background: #d73027;"></div>
+                        <span>Low</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box" style="background: #fee08b;"></div>
+                        <span>Medium</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box" style="background: #1a9850;"></div>
+                        <span>High</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
